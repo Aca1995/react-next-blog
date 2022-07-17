@@ -11,15 +11,11 @@ const PostWidget = ({ categories, slug }) => {
   // if we have a slug, that means we're on the article page, if we don't, we are on the landing page
   useEffect(() => {
     if (slug) {
-      getSimilarPosts(categories, slug).then((result) =>
-        setWidgetPosts(result)
-      );
+      getSimilarPosts(categories, slug).then(result => setWidgetPosts(result));
     } else {
-      getRecentPosts().then((result) => setWidgetPosts(result));
+      getRecentPosts().then(result => setWidgetPosts(result));
     }
   }, [slug]);
-
-  console.log(widgetPosts);
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-8 mb-8">
@@ -27,7 +23,7 @@ const PostWidget = ({ categories, slug }) => {
         {slug ? "Related Posts" : "Recent Posts"}
       </h3>
 
-      {widgetPosts.map((post) => (
+      {widgetPosts.map(post => (
         <div key={post.title} className="flex items-center w-full">
           <div className="w-16 flex-none">
             <img
@@ -39,9 +35,7 @@ const PostWidget = ({ categories, slug }) => {
             />
           </div>
           <div className="flex-grow ml-4">
-            <p className="text-gray-500 font-xs">
-              {moment(post.createdAt).format("MMM DD, YYYY")}
-            </p>
+            <p className="text-gray-500 font-xs">{moment(post.createdAt).format("MMM DD, YYYY")}</p>
             <Link href={`/post/${post.slug}`} key={post.title}>
               {post.title}
             </Link>
